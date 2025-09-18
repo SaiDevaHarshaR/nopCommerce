@@ -15,11 +15,14 @@ jobs:
           dotnet-version: 9.0.x
       - name: Restoring dependencies
         run: dotnet restore src/Presentation/nop.web/nop.web.csproj
-      - run: dotnet build src/Presentation/nop.web/nop.web.csproj --configuration Release
-      - run: dotnent publish --configuration release src/Presentation/nop.web/nop.web.csproj
-      - run: dotnet test src/Presentation/nop.web/nop.web.csproj --logger "trx;LogFileName=test-results.trx"
-      - name: to upload test results in artifact
+      - name: Building project
+        run: dotnet build src/Presentation/nop.web/nop.web.csproj --configuration Release
+      - name: Publishing project
+        run: dotnet publish src/Presentation/nop.web/nop.web.csproj --configuration Release
+      - name: Running tests
+        run: dotnet test src/Presentation/nop.web/nop.web.csproj --logger "trx;LogFileName=test-results.trx"
+      - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: src/Tests/nop.tests/nop.tests.csproj
+          path: ./src/Presentation/nop.web/TestResults/test-results.trx
