@@ -20,16 +20,16 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore dependencies
-        run: dotnet restore src/Presentation/nop.web/nop.web.csproj
+        run: dotnet restore src/Presentation/Nop.Web/Nop.Web.csproj
 
       - name: Build project
-        run: dotnet build src/Presentation/nop.web/nop.web.csproj --configuration Release --no-restore
+        run: dotnet build src/Presentation/Nop.Web/Nop.Web.csproj --configuration Release --no-restore
 
       - name: Publish project
-        run: dotnet publish src/Presentation/nop.web/nop.web.csproj --configuration Release --no-build -o ./publish
+        run: dotnet publish src/Presentation/Nop.Web/Nop.Web.csproj --configuration Release --no-build -o ./publish
 
       - name: Run tests
-        run: dotnet test src/Presentation/nop.web/nop.web.csproj --logger "trx;LogFileName=test-results.trx" --no-build
+        run: dotnet test src/Presentation/Nop.Web/Nop.Web.csproj --logger "trx;LogFileName=test-results.trx" --no-build
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
